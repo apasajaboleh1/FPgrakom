@@ -12,5 +12,5 @@ newmtl Road_2_Lane_Straight
 	Kd 0.5882 0.5882 0.5882
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka data1/testok.png
-	map_Kd data1/testok.png
+	map_Ka C:\\Users\\Freddy\\Documents\\hahahha\\data\\testok\\data1\\testok.png
+	map_Kd C:\\Users\\Freddy\\Documents\\hahahha\\data\\testok\\data1\\testok.png

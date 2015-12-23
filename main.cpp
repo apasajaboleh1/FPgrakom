@@ -2,26 +2,29 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 #include <gl\glut.h>
+#include <IL/il.h>
 #include "glm.h"
 #include "glmint.h"
 #include "glTexture.h"
 glTexture hTexture;
-GLMmodel *sample,*sample1;
+GLMmodel *sample,*sample1,*sample2,*sample3,*sample4,*sample5,*sample6;
 float ratio;
 double lookat[9]={4.5,3,0,0,0,0,0,1,0};
 void Draw()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
-    //glRotated(90,0,1,0);
-    glScaled(2.8,1.2,1);
-    glTranslatef(-2,-1.9,-0.7);
+    glScaled(3.4,1,12);
+    glTranslatef(-2,-3.65,-1);
+    glRotated(90,1,0,0);
+    //glScaled(2.8,1.2,1);
+
 
     glBegin(GL_QUADS);
         glTexCoord2d(0.0f, 0.0f);glVertex3f(-0.5f, 0.0f, -1.1f);
-        glTexCoord2d(0.0f, 1.0f);glVertex3f(-0.5f, 2.5f, -1.1f);
-        glTexCoord2d(1.0f, 1.0f);glVertex3f(2.5f, 2.5f, -1.1f);
-        glTexCoord2d(1.0f, 0.0f);glVertex3f(2.5f, 0.0f, -1.1f);
+        glTexCoord2d(0.0f, 5.0f);glVertex3f(-0.5f, 2.5f, -1.1f);
+        glTexCoord2d(5.0f, 5.0f);glVertex3f(2.5f, 2.5f, -1.1f);
+        glTexCoord2d(5.0f, 0.0f);glVertex3f(2.5f, 0.0f, -1.1f);
     glEnd();
     glPopMatrix();
 
@@ -44,15 +47,13 @@ void gerak(unsigned char key, int x, int y)
     {
         lookat[1]=0.3;
         lookat[0]=5;
+        lookat[2]=0;
     }
-    else if(key=='b')
-    {
-        lookat[1]=-2.2;
-    }
+
     else{
         lookat[0]=0;
-        lookat[1]=1;
-        lookat[2]=2.6;
+        lookat[1]=5;
+        lookat[2]=2;
     }
     glutPostRedisplay();
 }
@@ -80,13 +81,13 @@ void gambar_jalan()
     glmFacetNormals(sample);
     glmVertexNormals(sample,90.0,GL_TRUE);
     }
-    GLfloat mat_ambient[]={1.0f, 1.0f, 0.0f, 0.0f}; // gray
-    GLfloat mat_diffuse[]={1.0f, 1.0f, 0.0f, 0.0f};
-    GLfloat mat_specular[]={1.0f, 1.0f, 0.0f, 0.0f};
-    GLfloat mat_shininess[]={100.2f};
+    GLfloat mat_ambient[]={0.0f, 2.0f, 2.0f, 2.0f}; // gray
+    //GLfloat mat_diffuse[]={1.0f, 1.0f, 0.0f, 0.0f};
+    //GLfloat mat_specular[]={1.0f, 1.0f, 0.0f, 0.0f};
+    //GLfloat mat_shininess[]={100.2f};
     glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_ambient);
     glTranslated(-3.5,-2.5,1);
-    glScaled(4.5,1,1);
+    glScaled(5.1,1,1);
     glmDraw(sample, GLM_TEXTURE | GLM_SMOOTH);
 }
 void gambar_lain()
@@ -105,6 +106,14 @@ void gambar_lain()
     glmDraw(sample1,GLM_TEXTURE|GLM_SMOOTH);
 
 }
+void mobil()
+{
+
+}
+void gedung()
+{
+
+}
 void display() {
     //mode buffer warna dan 3 dimensi
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -114,18 +123,23 @@ void display() {
     //inisialisasi identity
     glLoadIdentity();
     GLfloat pos[4]={1.5,1.0,1.0,1.0};
-        glLightfv(GL_LIGHT0,GL_POSITION,pos);
-        gluLookAt(lookat[0],lookat[1],lookat[2],lookat[3],lookat[4],lookat[5],lookat[6],lookat[7],lookat[8]);
+    glLightfv(GL_LIGHT0,GL_POSITION,pos);
+    gluLookAt(lookat[0],lookat[1],lookat[2],lookat[3],lookat[4],lookat[5],lookat[6],lookat[7],lookat[8]);
     //push matrix object
-
+    Draw();
     glPushMatrix();
 
         //load object jika belum di load
-        Draw();
+
         gambar_jalan();
         gambar_lain();
 
+        glPushMatrix();
 
+        glPopMatrix();
+        glPushMatrix();
+
+        glPopMatrix();
 
         //jika ingin rotasi, translate, scale bisa di aplikasikan sebelum glmDraw();
         //glTranslatef(0,1,-5);
@@ -168,7 +182,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(gerak);
     glutIdleFunc(display);
     glutReshapeFunc(reshape);
-    hTexture.loadTextureInfo("C:\\Users\\Freddy\\Documents\\hahahha\\data\\12.bmp", 1);
+    hTexture.loadTextureInfo("C:\\Users\\Freddy\\Documents\\hahahha\\data\\st.bmp", 1);
     hTexture.SetActive(1);
     Init(); //init
     glutMainLoop();

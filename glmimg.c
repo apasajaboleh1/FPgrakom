@@ -13,8 +13,9 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glext.h>
 #else
-#include <GL/gl.h>
-#include <GL/glext.h>
+#include <Windows.h>
+#include <gl\glew.h>
+//#include <gl\GL.h>
 #endif
 #include "glm.h"
 /*
@@ -199,7 +200,7 @@ glmLoadTexture(const char *filename, GLboolean alpha, GLboolean repeat, GLboolea
 
     if(glm_do_init)
 	glmImgInit();
-    printf("%s",filename);
+
     /* fallback solution (PPM only) */
     data = glmReadPPM(filename, alpha, &width, &height, &type);
     if(data != NULL) {
@@ -207,13 +208,13 @@ glmLoadTexture(const char *filename, GLboolean alpha, GLboolean repeat, GLboolea
 	goto DONE;
     }
 
-#ifdef HAVE_DEVIL
+//#ifdef HAVE_DEVIL
     data = glmReadDevIL(filename, alpha, &width, &height, &type);
     if(data != NULL) {
 	DBG_(__glmWarning("glmLoadTexture(): got DevIL for %s",filename));
 	goto DONE;
     }
-#endif
+//#endif
 #ifdef HAVE_LIBJPEG
     data = glmReadJPG(filename, alpha, &width, &height, &type);
     if(data != NULL) {
@@ -243,7 +244,7 @@ glmLoadTexture(const char *filename, GLboolean alpha, GLboolean repeat, GLboolea
     }
 #endif
 
-    __glmWarning("glmLoadTexture() failed: Unable to load texture from %s!", filename);
+    __glmWarning("glmLoadTexture() - failed: Unable to load texture from %s!", filename);
     DBG_(__glmWarning("glmLoadTexture() failed: tried PPM"));
 #ifdef HAVE_LIBJPEG
     DBG_(__glmWarning("glmLoadTexture() failed: tried JPEG"));

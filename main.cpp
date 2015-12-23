@@ -14,7 +14,7 @@ void Draw()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
-    glScaled(3.4,1,12);
+    glScaled(3.6,1,12);
     glTranslatef(-2,-3.65,-1);
     glRotated(90,1,0,0);
     //glScaled(2.8,1.2,1);
@@ -53,20 +53,21 @@ void gerak(unsigned char key, int x, int y)
     else{
         lookat[0]=0;
         lookat[1]=5;
-        lookat[2]=2;
+        lookat[2]=1;
     }
     glutPostRedisplay();
 }
 void Init() {
     //inisialisasi mode smoot dan texture dari gambar
     glEnable(GL_TEXTURE_2D);
+
     glEnable(GL_POINT_SMOOTH);
     glHint(GL_POINT_SMOOTH_HINT, GL_DONT_CARE);
     //Perspektif View
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //blend warna untuk texture dan warna
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
@@ -81,11 +82,11 @@ void gambar_jalan()
     glmFacetNormals(sample);
     glmVertexNormals(sample,90.0,GL_TRUE);
     }
-    GLfloat mat_ambient[]={0.0f, 2.0f, 2.0f, 2.0f}; // gray
+    //GLfloat mat_ambient[]={0.0f, 2.0f, 2.0f, 2.0f}; // gray
     //GLfloat mat_diffuse[]={1.0f, 1.0f, 0.0f, 0.0f};
     //GLfloat mat_specular[]={1.0f, 1.0f, 0.0f, 0.0f};
     //GLfloat mat_shininess[]={100.2f};
-    glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_ambient);
+    //glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_ambient);
     glTranslated(-3.5,-2.5,1);
     glScaled(5.1,1,1);
     glmDraw(sample, GLM_TEXTURE | GLM_SMOOTH);
@@ -108,7 +109,16 @@ void gambar_lain()
 }
 void mobil()
 {
+    if(!sample2)
+    {
+        sample2=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\SCI_FRS_13_HD.obj");
+        if(!sample2)exit(0);
+        glmUnitize(sample2);
+        glmFacetNormals(sample2);
+        glmVertexNormals(sample2,90.0,GL_TRUE);
 
+    }
+    glmDraw(sample1,GLM_TEXTURE|GLM_SMOOTH);
 }
 void gedung()
 {
@@ -135,7 +145,7 @@ void display() {
         gambar_lain();
 
         glPushMatrix();
-
+            //mobil();
         glPopMatrix();
         glPushMatrix();
 

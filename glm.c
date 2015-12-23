@@ -254,7 +254,7 @@ glmFindOrAddTexture(GLMmodel* model, const char* name)
     GLuint i;
     char *dir, *filename;
     float width, height;
-    printf("oke gan\n");
+    //printf("oke gan\n");
     /* XXX doing a linear search on a string key'd list is pretty lame,
        but it works and is fast enough for now. */
     for (i = 0; i < model->numtextures; i++) {
@@ -472,7 +472,7 @@ glmReadMTL(GLMmodel* model, char* name)
             t_filename = __glmStrStrip(tex_filename);
             free(tex_filename);
             if(strncmp(buf, "map_Kd", 6) == 0) {
-                    printf("%s",t_filename);
+                    //printf("%s",t_filename);
                 model->materials[nummaterials].map_diffuse = glmFindOrAddTexture(model, t_filename);
                 free(t_filename);
                 //__glmFatalError("%s",t_filename);

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1450750015 source:c:\users\freddy\documents\hahahha\glm.c
+1450856414 source:c:\users\freddy\documents\hahahha\glm.c
 	"config.h"
 	<math.h>
 	<stdio.h>
@@ -58,7 +58,7 @@
 	"glm.h"
 	"glmint.h"
 
-1450749786 source:c:\users\freddy\documents\hahahha\glmimg.c
+1450886431 source:c:\users\freddy\documents\hahahha\glmimg.c
 	"config.h"
 	<stdio.h>
 	<stdlib.h>
@@ -68,8 +68,8 @@
 	<windows.h>
 	<OpenGL/gl.h>
 	<OpenGL/glext.h>
-	<GL/gl.h>
-	<GL/glext.h>
+	<Windows.h>
+	<gl\glew.h>
 	"glm.h"
 	"glmint.h"
 
@@ -270,7 +270,7 @@
 1301111164 c:\program files (x86)\codeblocks\mingw\include\gl\glext.h
 	<windows.h>
 
-1418325208 source:c:\users\freddy\documents\hahahha\glmimg_devil.c
+1450886324 source:c:\users\freddy\documents\hahahha\glmimg_devil.c
 	"config.h"
 	"glm.h"
 	"glmint.h"
@@ -361,12 +361,27 @@
 	<stdio.h>
 	<stdlib.h>
 
-1450811232 source:c:\users\freddy\documents\hahahha\main.cpp
+1450886190 source:c:\users\freddy\documents\hahahha\main.cpp
 	<windows.h>
 	<gl\GL.h>
 	<gl\GLU.h>
 	<gl\glut.h>
+	<IL/il.h>
 	"glm.h"
 	"glmint.h"
 	"glTexture.h"
+
+1422343094 c:\program files (x86)\codeblocks\mingw\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1341006772 c:\program files (x86)\codeblocks\mingw\include\inttypes.h
+	<_mingw.h>
+	<stdint.h>
+	<stddef.h>
 

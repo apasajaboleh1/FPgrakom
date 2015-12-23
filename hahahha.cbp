@@ -16,10 +16,16 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
+					<Add option="-lglfw -lopengl32 -lglu32 -lgdi32" />
 					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libopengl32.a" />
 					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libadvapi32.a" />
 					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libglu32.a" />
 					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libglut32.a" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\DevIL.lib" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\ILU.lib" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\ILUT.lib" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\glew32s.lib" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libglfw.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">

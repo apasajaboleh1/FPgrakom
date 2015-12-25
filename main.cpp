@@ -14,17 +14,16 @@ void Draw()
 {
     glPushMatrix();
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    glScaled(3.6,1,12);
-    glTranslatef(-2,-3.65,-1);
+    glScaled(5,1,15);
+    glTranslatef(-2,-3.65,-1.33);
     glRotated(90,1,0,0);
     GLfloat mat_ambient[]={0.0f, 1.0f, 0.0f, 0.0f}; // gray
     glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_ambient);
     glBegin(GL_QUADS);
         glTexCoord2d(0.0f, 0.0f);glVertex3f(-0.5f, 0.0f, -1.1f);
-        glTexCoord2d(0.0f, 5.0f);glVertex3f(-0.5f, 2.5f, -1.1f);
-        glTexCoord2d(5.0f, 5.0f);glVertex3f(2.5f, 2.5f, -1.1f);
-        glTexCoord2d(5.0f, 0.0f);glTexCoord2d(5.0f, 0.0f);
-        glVertex3f(2.5f, 0.0f, -1.1f);
+        glTexCoord2d(0.0f, 15.0f);glVertex3f(-0.5f, 2.5f, -1.1f);
+        glTexCoord2d(15.0f, 15.0f);glVertex3f(2.5f, 2.5f, -1.1f);
+        glTexCoord2d(15.0f, 0.0f);glVertex3f(2.5f, 0.0f, -1.1f);
     glEnd();
     glPopMatrix();
 }
@@ -44,7 +43,7 @@ void gerak(unsigned char key, int x, int y)
     }
     else if(key=='a')
     {
-        lookat[1]=0.3;
+        lookat[1]=0.1;
         lookat[0]=5;
         lookat[2]=0;
     }
@@ -83,7 +82,7 @@ void gambar_jalan()
     glmVertexNormals(sample,90.0,GL_TRUE);
     }
     glTranslated(-3.5,-2.5,1);
-    glScaled(5.1,1,1);
+    glScaled(6,1,1);
     glmDraw(sample, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
 }
 void gambar_lain()
@@ -106,7 +105,7 @@ void mobil()
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     if(!sample2)
     {
-        sample2=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\SCI_FRS_13_HD.obj");
+        sample2=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\SCI_FRS_13_HD.obj"); //??????? errr ini gambar
         if(!sample2)exit(0);
         glmUnitize(sample2);
         glmFacetNormals(sample2);
@@ -125,9 +124,55 @@ void gedung()
             glmFacetNormals(sample3);
             glmVertexNormals(sample3,90.0,GL_TRUE);
         }
-        glTranslated(0,5,0);
+        glScalef(0.8,1,1);
+        glTranslatef(.65,0.5,-2);
+        glRotated(-90,0,1,0);
         glmDraw(sample3, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
-    }
+}
+void gedung1()
+{
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+     if(!sample4)
+        {
+            sample4=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\4.obj");
+            if(!sample4)exit(0);
+            glmUnitize(sample4);
+            glmFacetNormals(sample4);
+            glmVertexNormals(sample4,90.0,GL_TRUE);
+        }
+        glTranslatef(0,0,.6);
+        glmDraw(sample4, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+}
+void gedungki()
+{
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+     if(!sample5)
+        {
+            sample5=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\al.obj");
+            if(!sample5)exit(0);
+            glmUnitize(sample5);
+            glmFacetNormals(sample5);
+            glmVertexNormals(sample5,90.0,GL_TRUE);
+        }
+
+        glTranslatef(0,2,0);
+        glmDraw(sample5, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+}
+void gedungki2()
+{
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+     if(!sample6)
+        {
+            sample6=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\al.obj");
+            if(!sample6)exit(0);
+            glmUnitize(sample6);
+            glmFacetNormals(sample6);
+            glmVertexNormals(sample6,90.0,GL_TRUE);
+        }
+
+        glTranslatef(0,2,0);
+        glmDraw(sample6, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+}
 void display() {
     //mode buffer warna dan 3 dimensi
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -136,7 +181,25 @@ void display() {
 
     //inisialisasi identity
     glLoadIdentity();
-    GLfloat pos[4]={1.5,1.0,1.0,1.0};
+    GLfloat light1_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
+    GLfloat light1_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat light1_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat light1_position[] = { 3.0, 3.0, 1.0, 1.0 };
+    GLfloat spot_direction[] = { 3.0, 3.0, 0.0 };
+
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light1_ambient);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_diffuse);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light1_specular);
+    glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
+    glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 1.5);
+    glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.5);
+    glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.2);
+
+    glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 45.0);
+    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
+    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 2.0);
+    glEnable(GL_LIGHT1);
+    GLfloat pos[4]={0.1,1.0,1.0,1.0};
     glLightfv(GL_LIGHT0,GL_POSITION,pos);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
@@ -145,14 +208,21 @@ void display() {
     //push matrix object
     Draw();
     glPushMatrix();
-        gambar_jalan();
-        gambar_lain();
+        gambar_jalan();//jalan no 1
+        gambar_lain();// jalan no 2
 
         glPushMatrix();
             //mobil();
         glPopMatrix();
-        glPushMatrix();
-            gedung();
+
+        glPushMatrix();//gedung kanan
+            gedung(); //gedung kanan bawah
+            gedung1();//gedung kanan atas
+        glPopMatrix();
+
+        glPushMatrix(); //gedung kiri
+            //gedungki();
+            //gedungki2();
         glPopMatrix();
     //pop matrix object
     glPopMatrix();
@@ -177,7 +247,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA); //inisialisasi mode detail, 3 dimensi dan RGB
     glutInitWindowPosition(300,1);
     glutInitWindowSize(1000, 1000);
-    glutCreateWindow("TestObject");
+    glutCreateWindow("FP Grafkom");
     glutDisplayFunc(display);
     glutKeyboardFunc(gerak);
     glutIdleFunc(display);

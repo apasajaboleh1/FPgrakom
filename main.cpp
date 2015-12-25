@@ -6,26 +6,35 @@
 #include "glm.h"
 #include "glmint.h"
 #include "glTexture.h"
+//untuk yang buang texture tinggal command aja yang GLM_TEXTURE
+//untuk ngubah lighting ngubah aja d light pos itu saja
+
+
 glTexture hTexture;
-GLMmodel *sample,*sample1,*sample2,*sample3,*sample4,*sample5,*sample6;
+GLMmodel *sample,*sample1,*sample2,*sample3,*sample4,*sample5,*sample6, *sample7;
 float ratio;
 double lookat[9]={4.5,3,0,0,0,0,0,1,0};
 void Draw()
 {
+    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
+    hTexture.SetActive(1);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glScaled(5,1,15);
     glTranslatef(-2,-3.65,-1.33);
     glRotated(90,1,0,0);
     GLfloat mat_ambient[]={0.0f, 1.0f, 0.0f, 0.0f}; // gray
     glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_ambient);
+
     glBegin(GL_QUADS);
         glTexCoord2d(0.0f, 0.0f);glVertex3f(-0.5f, 0.0f, -1.1f);
         glTexCoord2d(0.0f, 15.0f);glVertex3f(-0.5f, 2.5f, -1.1f);
         glTexCoord2d(15.0f, 15.0f);glVertex3f(2.5f, 2.5f, -1.1f);
         glTexCoord2d(15.0f, 0.0f);glVertex3f(2.5f, 0.0f, -1.1f);
     glEnd();
+
     glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 }
 void gerak(unsigned char key, int x, int y)
 {
@@ -50,14 +59,14 @@ void gerak(unsigned char key, int x, int y)
 
     else{
         lookat[0]=0;
-        lookat[1]=5;
-        lookat[2]=1;
+        lookat[1]=0.5;
+        lookat[2]=2;
     }
     glutPostRedisplay();
 }
 void Init() {
     //inisialisasi mode smoot dan texture dari gambar
-    glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_TEXTURE_2D);
 
     glEnable(GL_POINT_SMOOTH);
     glHint(GL_POINT_SMOOTH_HINT, GL_DONT_CARE);
@@ -73,6 +82,7 @@ void Init() {
 }
 void gambar_jalan()
 {
+    glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     if (!sample) {
     sample = glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\testok.obj");
@@ -84,9 +94,11 @@ void gambar_jalan()
     glTranslated(-3.5,-2.5,1);
     glScaled(6,1,1);
     glmDraw(sample, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    glDisable(GL_TEXTURE_2D);
 }
 void gambar_lain()
 {
+    glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     if(!sample1)
     {
@@ -99,9 +111,11 @@ void gambar_lain()
     }
     glTranslated(0,0,-2);
     glmDraw(sample1, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    glDisable(GL_TEXTURE_2D);
 }
 void mobil()
 {
+    glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     if(!sample2)
     {
@@ -112,9 +126,11 @@ void mobil()
         glmVertexNormals(sample2,90.0,GL_TRUE);
     }
     glmDraw(sample2, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    glDisable(GL_TEXTURE_2D);
 }
 void gedung()
 {
+    glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
      if(!sample3)
         {
@@ -124,13 +140,15 @@ void gedung()
             glmFacetNormals(sample3);
             glmVertexNormals(sample3,90.0,GL_TRUE);
         }
-        glScalef(0.8,1,1);
-        glTranslatef(.65,0.5,-2);
+        glScalef(0.75,1,1);
+        glTranslatef(.9,0.5,-2);
         glRotated(-90,0,1,0);
         glmDraw(sample3, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        glDisable(GL_TEXTURE_2D);
 }
 void gedung1()
 {
+    glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
      if(!sample4)
         {
@@ -140,38 +158,44 @@ void gedung1()
             glmFacetNormals(sample4);
             glmVertexNormals(sample4,90.0,GL_TRUE);
         }
-        glTranslatef(0,0,.6);
+        glTranslatef(0,0,.67);
         glmDraw(sample4, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        glDisable(GL_TEXTURE_2D);
 }
 void gedungki()
 {
+    glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
      if(!sample5)
         {
-            sample5=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\al.obj");
+            sample5=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\building.obj");
             if(!sample5)exit(0);
             glmUnitize(sample5);
             glmFacetNormals(sample5);
             glmVertexNormals(sample5,90.0,GL_TRUE);
         }
-
-        glTranslatef(0,2,0);
+        glScaled(0.5,3,1.01);
+        glTranslatef(1.6,0.65,2.71);
+        glRotatef(180,0,1,0);
         glmDraw(sample5, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        glDisable(GL_TEXTURE_2D);
 }
 void gedungki2()
 {
+    glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
      if(!sample6)
         {
-            sample6=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\al.obj");
+            sample6=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\building.obj");
             if(!sample6)exit(0);
             glmUnitize(sample6);
             glmFacetNormals(sample6);
             glmVertexNormals(sample6,90.0,GL_TRUE);
         }
 
-        glTranslatef(0,2,0);
+        glTranslatef(1,0,0);
         glmDraw(sample6, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        glDisable(GL_TEXTURE_2D);
 }
 void display() {
     //mode buffer warna dan 3 dimensi
@@ -197,7 +221,7 @@ void display() {
 
     glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 45.0);
     glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
-    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 2.0);
+    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 3.0);
     glEnable(GL_LIGHT1);
     GLfloat pos[4]={0.1,1.0,1.0,1.0};
     glLightfv(GL_LIGHT0,GL_POSITION,pos);
@@ -221,8 +245,8 @@ void display() {
         glPopMatrix();
 
         glPushMatrix(); //gedung kiri
-            //gedungki();
-            //gedungki2();
+            gedungki();
+            gedungki2();
         glPopMatrix();
     //pop matrix object
     glPopMatrix();
@@ -243,6 +267,7 @@ void reshape(int w, int h){
 }
 int main(int argc, char** argv)
 {
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA); //inisialisasi mode detail, 3 dimensi dan RGB
     glutInitWindowPosition(300,1);
@@ -253,7 +278,6 @@ int main(int argc, char** argv)
     glutIdleFunc(display);
     glutReshapeFunc(reshape);
     hTexture.loadTextureInfo("C:\\Users\\Freddy\\Documents\\hahahha\\data\\st.bmp", 1);
-    hTexture.SetActive(1);
     Init();
     glutMainLoop();
     return 0;

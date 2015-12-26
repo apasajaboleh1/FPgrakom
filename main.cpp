@@ -50,14 +50,104 @@ void gerak(unsigned char key, int x, int y)
         lookat[7]=1;
         lookat[8]=0;
     }
+    else if(key=='q')
+    {
+        if(lookat[0]<=5)
+        lookat[0]+=0.1;
+    }
+    else if(key=='w')
+    {
+        if(lookat[1]<=5)
+        lookat[1]+=0.1;
+    }
+    else if(key=='e')
+    {
+        if(lookat[2]<=5)
+        lookat[2]+=0.1;
+    }
     else if(key=='a')
+    {
+        if(lookat[3]<=5)
+        lookat[3]+=0.1;
+    }
+    else if(key=='s')
+    {
+        if(lookat[4]<=5)
+        lookat[4]+=0.1;
+    }
+    else if(key=='d')
+    {
+        if(lookat[5]<=5)
+        lookat[5]+=0.1;
+    }
+    else if(key=='z')
+    {
+        if(lookat[6]<=5)
+        lookat[6]+=0.1;
+    }
+    else if(key=='x')
+    {
+        if(lookat[7]<=5)
+        lookat[7]+=0.1;
+    }
+    else if(key=='c')
+    {
+        if(lookat[8]<=5)
+        lookat[8]+=0.1;
+    }
+    else if(key=='t')
+    {
+        if(lookat[0]>=-5)
+        lookat[0]-=0.1;
+    }
+    else if(key=='y')
+    {
+        if(lookat[1]>=-5)
+            lookat[1]-=0.1;
+    }
+    else if(key=='u')
+    {
+        if(lookat[2]>=-5)
+            lookat[2]-=0.1;
+    }
+    else if(key=='g')
+    {
+        if(lookat[3]>=-5)
+            lookat[3]-=0.1;
+    }
+    else if(key=='h')
+    {
+        if(lookat[4]>=-5)
+            lookat[4]-=0.1;
+    }
+    else if(key=='j')
+    {
+        if(lookat[5]>=-5)
+            lookat[5]-=0.1;
+    }
+    else if(key=='b')
+    {
+        if(lookat[6]>=-5)
+            lookat[6]-=0.1;
+    }
+    else if(key=='n')
+    {
+        if(lookat[7]>=-5)
+            lookat[7]-=0.1;
+    }
+    else if(key=='m')
+    {
+        if(lookat[8]>=-5)
+            lookat[8]-=0.1;
+    }
+    else if(key=='p')
     {
         lookat[1]=0.1;
         lookat[0]=5;
         lookat[2]=0;
     }
 
-    else{
+    else if (key=='o'){
         lookat[0]=0;
         lookat[1]=0.5;
         lookat[2]=2;
@@ -175,7 +265,7 @@ void gedungki()
             glmVertexNormals(sample5,90.0,GL_TRUE);
         }
         glScaled(0.5,3,1.01);
-        glTranslatef(1.6,0.65,2.71);
+        glTranslatef(1.6,0.1,2.8);
         glRotatef(180,0,1,0);
         glmDraw(sample5, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
         glDisable(GL_TEXTURE_2D);

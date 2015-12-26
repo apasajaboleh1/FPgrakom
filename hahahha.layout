@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="glm.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="68413" topLine="1988" />
+		</Cursor>
+	</File>
+	<File name="glmint.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="115" topLine="25" />
+		</Cursor>
+	</File>
+	<File name="glmimg_devil.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="864" topLine="27" />
+		</Cursor>
+	</File>
 	<File name="glmimg.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="6040" topLine="199" />
@@ -18,27 +33,21 @@
 	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6979" topLine="255" />
+			<Cursor1 position="1257" topLine="29" />
 		</Cursor>
+		<Folding>
+			<Collapse line="255" />
+			<Collapse line="274" />
+			<Collapse line="336" />
+			<Collapse line="357" />
+			<Collapse line="397" />
+			<Collapse line="478" />
+			<Collapse line="489" />
+		</Folding>
 	</File>
 	<File name="glm.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="4518" topLine="127" />
-		</Cursor>
-	</File>
-	<File name="glm.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="68413" topLine="1988" />
-		</Cursor>
-	</File>
-	<File name="glmint.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="115" topLine="25" />
-		</Cursor>
-	</File>
-	<File name="glmimg_devil.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="864" topLine="27" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

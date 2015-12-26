@@ -13,11 +13,15 @@
 glTexture hTexture;
 GLMmodel *sample,*sample1,*sample2,*sample3,*sample4,*sample5,*sample6, *sample7;
 float ratio;
+float position=-0.5;
 double lookat[9]={4.5,3,0,0,0,0,0,1,0};
+GLfloat pos[4]={0.1,1.0,1.0,1.0};
+bool tex=true;
 void Draw()
 {
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
+    if(tex)
     hTexture.SetActive(1);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glScaled(5,1,15);
@@ -36,6 +40,13 @@ void Draw()
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
 }
+/*
+    untuk lookat q,w,e,a,s,d,z,x,c ;untuk tambah
+    untuk lookat t,y,u,g,h,j,b,n,m ; untuk ngurangi
+    untuk lighting a,s,d,f ; untuk tambah
+    untuk lighting g,h,j,k ; untuk ngurangi;
+    untuk maju mundur 1,2 ; untuk mobilnya saja;
+*/
 void gerak(unsigned char key, int x, int y)
 {
     if(key=='r')
@@ -49,6 +60,53 @@ void gerak(unsigned char key, int x, int y)
         lookat[6]=0;
         lookat[7]=1;
         lookat[8]=0;
+    }
+    else if(key=='R')
+    {
+        pos[0]=0.1;
+        pos[1]=1.0;
+        pos[2]=1.0;
+        pos[3]=1.0;
+    }
+    else if(key=='A')
+    {
+        if(pos[0]<=5)
+            pos[0]+=0.1;
+    }
+    else if(key=='S')
+    {
+        if(pos[1]<=5)
+            pos[1]+=0.1;
+    }
+    else if(key=='D')
+    {
+        if(pos[2]<=5)
+            pos[2]+=0.1;
+    }
+    else if(key=='F')
+    {
+        if(pos[3]<=5)
+            pos[3]+=0.1;
+    }
+    else if(key=='G')
+    {
+        if(pos[0]>=-5)
+            pos[0]-=0.1;
+    }
+    else if(key=='H')
+    {
+        if(pos[1]>=-5)
+            pos[1]-=0.1;
+    }
+    else if(key=='J')
+    {
+        if(pos[2]>=-5)
+            pos[2]-=0.1;
+    }
+    else if(key=='K')
+    {
+        if(pos[3]>=-5)
+            pos[3]-=0.1;
     }
     else if(key=='q')
     {
@@ -140,6 +198,16 @@ void gerak(unsigned char key, int x, int y)
         if(lookat[8]>=-5)
             lookat[8]-=0.1;
     }
+    else if(key=='1')
+    {
+        if(position<=0)
+            position+=0.01;
+    }
+    else if(key=='2')
+    {
+        if(position>=-1)
+            position-=0.01;
+    }
     else if(key=='p')
     {
         lookat[1]=0.1;
@@ -154,10 +222,20 @@ void gerak(unsigned char key, int x, int y)
     }
     glutPostRedisplay();
 }
+void menu(int id)
+{
+    if(id==1)
+    {
+        tex=true;
+    }
+    else if(id==2)
+    {
+        tex=false;
+    }
+}
 void Init() {
     //inisialisasi mode smoot dan texture dari gambar
     //glEnable(GL_TEXTURE_2D);
-
     glEnable(GL_POINT_SMOOTH);
     glHint(GL_POINT_SMOOTH_HINT, GL_DONT_CARE);
     //Perspektif View
@@ -169,6 +247,10 @@ void Init() {
     //blend warna untuk texture dan warna
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+    glutCreateMenu(menu);
+    glutAddMenuEntry("Texture On",1);
+    glutAddMenuEntry("Texture Off",2);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 void gambar_jalan()
 {
@@ -183,7 +265,10 @@ void gambar_jalan()
     }
     glTranslated(-3.5,-2.5,1);
     glScaled(6,1,1);
+    if(tex)
     glmDraw(sample, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    else
+    glmDraw(sample,GLM_SMOOTH|GLM_MATERIAL);
     glDisable(GL_TEXTURE_2D);
 }
 void gambar_lain()
@@ -200,7 +285,10 @@ void gambar_lain()
 
     }
     glTranslated(0,0,-2);
+    if(tex)
     glmDraw(sample1, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    else
+    glmDraw(sample1,GLM_SMOOTH|GLM_MATERIAL);
     glDisable(GL_TEXTURE_2D);
 }
 void mobil()
@@ -209,13 +297,40 @@ void mobil()
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     if(!sample2)
     {
-        sample2=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\SCI_FRS_13_HD.obj"); //??????? errr ini gambar
+        sample2=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\LEGO_CAR_A2.obj"); //??????? errr ini gambar
         if(!sample2)exit(0);
         glmUnitize(sample2);
         glmFacetNormals(sample2);
         glmVertexNormals(sample2,90.0,GL_TRUE);
     }
+    glScalef(0.2,0.5,1);
+    glTranslatef(1,.2,0);
+    glRotatef(90,0,1,0);
+    if(tex)
     glmDraw(sample2, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    else
+    glmDraw(sample2,GLM_SMOOTH|GLM_MATERIAL);
+    glDisable(GL_TEXTURE_2D);
+}
+void mobil1()
+{
+    glEnable(GL_TEXTURE_2D);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    if(!sample7)
+    {
+        sample7=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\LEGO_CAR_A2.obj"); //??????? errr ini gambar
+        if(!sample7)exit(0);
+        glmUnitize(sample7);
+        glmFacetNormals(sample7);
+        glmVertexNormals(sample7,90.0,GL_TRUE);
+    }
+    //glScalef(0.2,0.5,1);
+    glTranslatef(0,0,2.3);
+    //glRotatef(90,0,1,0);
+    if(tex)
+    glmDraw(sample7, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    else
+    glmDraw(sample7,GLM_SMOOTH|GLM_MATERIAL);
     glDisable(GL_TEXTURE_2D);
 }
 void gedung()
@@ -231,9 +346,12 @@ void gedung()
             glmVertexNormals(sample3,90.0,GL_TRUE);
         }
         glScalef(0.75,1,1);
-        glTranslatef(.9,0.5,-2);
+        glTranslatef(.9,0.3,-2);
         glRotated(-90,0,1,0);
+        if(tex)
         glmDraw(sample3, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        else
+        glmDraw(sample3,GLM_SMOOTH|GLM_MATERIAL);
         glDisable(GL_TEXTURE_2D);
 }
 void gedung1()
@@ -249,7 +367,10 @@ void gedung1()
             glmVertexNormals(sample4,90.0,GL_TRUE);
         }
         glTranslatef(0,0,.67);
+        if(tex)
         glmDraw(sample4, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        else
+        glmDraw(sample4,GLM_SMOOTH|GLM_MATERIAL);
         glDisable(GL_TEXTURE_2D);
 }
 void gedungki()
@@ -265,9 +386,12 @@ void gedungki()
             glmVertexNormals(sample5,90.0,GL_TRUE);
         }
         glScaled(0.5,3,1.01);
-        glTranslatef(1.6,0.1,2.8);
+        glTranslatef(1.6,0.2,3.5);
         glRotatef(180,0,1,0);
+        if(tex)
         glmDraw(sample5, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        else
+        glmDraw(sample5,GLM_SMOOTH|GLM_MATERIAL);
         glDisable(GL_TEXTURE_2D);
 }
 void gedungki2()
@@ -284,7 +408,10 @@ void gedungki2()
         }
 
         glTranslatef(1,0,0);
+        if(tex)
         glmDraw(sample6, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+        else
+        glmDraw(sample6,GLM_SMOOTH|GLM_MATERIAL);
         glDisable(GL_TEXTURE_2D);
 }
 void display() {
@@ -313,7 +440,7 @@ void display() {
     glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
     glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 3.0);
     glEnable(GL_LIGHT1);
-    GLfloat pos[4]={0.1,1.0,1.0,1.0};
+
     glLightfv(GL_LIGHT0,GL_POSITION,pos);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
@@ -326,7 +453,11 @@ void display() {
         gambar_lain();// jalan no 2
 
         glPushMatrix();
-            //mobil();
+            glTranslatef(position,0,0);
+            mobil();
+            glPushMatrix();
+                mobil1();
+            glPopMatrix();
         glPopMatrix();
 
         glPushMatrix();//gedung kanan

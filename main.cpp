@@ -11,7 +11,7 @@
 
 
 glTexture hTexture;
-GLMmodel *sample,*sample1,*sample2,*sample3,*sample4,*sample5,*sample6, *sample7;
+GLMmodel *sample,*sample1,*sample2,*sample3,*sample4,*sample5,*sample6, *sample7, *sample8,*sample9;
 float ratio;
 float position=-0.5;
 double lookat[9]={4.5,3,0,0,0,0,0,1,0};
@@ -205,7 +205,7 @@ void gerak(unsigned char key, int x, int y)
     }
     else if(key=='2')
     {
-        if(position>=-1)
+        if(position>=-0.9)
             position-=0.01;
     }
     else if(key=='p')
@@ -304,7 +304,7 @@ void mobil()
         glmVertexNormals(sample2,90.0,GL_TRUE);
     }
     glScalef(0.2,0.5,1);
-    glTranslatef(1,.2,0);
+    glTranslatef(1,.3,0);
     glRotatef(90,0,1,0);
     if(tex)
     glmDraw(sample2, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
@@ -331,6 +331,47 @@ void mobil1()
     glmDraw(sample7, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
     else
     glmDraw(sample7,GLM_SMOOTH|GLM_MATERIAL);
+    glDisable(GL_TEXTURE_2D);
+}
+void mobilk1()
+{
+    glEnable(GL_TEXTURE_2D);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    if(!sample8)
+    {
+        sample8=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\LEGO_CAR_B1.obj"); //??????? errr ini gambar
+        if(!sample8)exit(0);
+        glmUnitize(sample8);
+        glmFacetNormals(sample8);
+        glmVertexNormals(sample8,90.0,GL_TRUE);
+    }
+    glScalef(0.2,0.5,1);
+    glTranslatef(1,.26,2);
+    glRotated(-90,0,1,0);
+    if(tex)
+    glmDraw(sample8, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    else
+    glmDraw(sample8,GLM_SMOOTH|GLM_MATERIAL);
+    glDisable(GL_TEXTURE_2D);
+}
+void mobilk2()
+{
+    glEnable(GL_TEXTURE_2D);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    if(!sample9)
+    {
+        sample9=glmReadOBJ("C:\\Users\\Freddy\\Documents\\hahahha\\data\\LEGO_CAR_B1.obj"); //??????? errr ini gambar
+        if(!sample9)exit(0);
+        glmUnitize(sample9);
+        glmFacetNormals(sample9);
+        glmVertexNormals(sample9,90.0,GL_TRUE);
+    }
+    glTranslatef(0,0,-2);
+
+    if(tex)
+    glmDraw(sample9, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
+    else
+    glmDraw(sample9,GLM_SMOOTH|GLM_MATERIAL);
     glDisable(GL_TEXTURE_2D);
 }
 void gedung()
@@ -386,7 +427,7 @@ void gedungki()
             glmVertexNormals(sample5,90.0,GL_TRUE);
         }
         glScaled(0.5,3,1.01);
-        glTranslatef(1.6,0.2,3.5);
+        glTranslatef(1.4,0.2,3.5);
         glRotatef(180,0,1,0);
         if(tex)
         glmDraw(sample5, GLM_SMOOTH | GLM_TEXTURE|GLM_MATERIAL);
@@ -449,14 +490,23 @@ void display() {
     //push matrix object
     Draw();
     glPushMatrix();
+    glTranslatef(0,0,position);
         gambar_jalan();//jalan no 1
         gambar_lain();// jalan no 2
 
         glPushMatrix();
-            glTranslatef(position,0,0);
+            glTranslatef(position+0.1,0,0);
             mobil();
             glPushMatrix();
                 mobil1();
+            glPopMatrix();
+        glPopMatrix();
+
+        glPushMatrix();
+        glTranslatef((position*-1)-0.75,0,0);
+            mobilk1();
+            glPushMatrix();
+                mobilk2();
             glPopMatrix();
         glPopMatrix();
 
